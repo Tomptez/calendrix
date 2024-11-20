@@ -1,0 +1,5 @@
+.directory
+*.old
+*.db
+venv
+__*

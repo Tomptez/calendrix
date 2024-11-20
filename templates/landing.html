@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block head_added %}
+    <title>Poodle</title>
+{% endblock %}
+
+{% block main %}
+    <h3> Welcome to Poodle</h3>
+    {% with message = get_flashed_messages() %}
+        {% if message%}
+        <span id='error'>{{ message[0] }} </span> <br>
+        {% endif %}
+    {% endwith %}
+    <p id="welcometext">This is a simple and light application for scheduling dates with your peers. <br> <br>
+    To get started, simply click on the button "New Poodle" to enter some information about your poll and which dates and times you want to include.<br>
+    You can then simply share the link to your poll and everybody can fill in their availability to quickly find the best date and time for your next meeting.</p>
+    
+    <a href="/newpoodle"><button type="button">New Poodle</button></a>
+{% endblock %}

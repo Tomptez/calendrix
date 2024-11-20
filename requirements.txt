@@ -1,0 +1,23 @@
+babel==2.16.0
+blinker==1.9.0
+click==8.1.7
+dominate==2.9.1
+Flask==3.1.0
+flask-babel==4.0.0
+Flask-Bootstrap==3.3.7.1
+Flask-SQLAlchemy==3.1.1
+Flask-Table @ git+https://github.com/Tomptez/flask_table.git@24c1ff6ba70dda2b8a0cc13fc46cc4d04fb3d174
+greenlet==3.1.1
+itsdangerous==2.2.0
+Jinja2==3.1.4
+MarkupSafe==3.0.2
+numpy==2.1.3
+pandas==2.2.3
+python-dateutil==2.9.0.post0
+pytz==2024.2
+six==1.16.0
+SQLAlchemy==2.0.36
+typing_extensions==4.12.2
+tzdata==2024.2
+visitor==0.1.3
+Werkzeug==3.1.3

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block head_added %}
+    <title>Create new poodle</title>
+    <link type="text/css" rel="stylesheet"  href="{{ url_for('static', filename='css/bootstrap-datepicker3.standalone.min.css') }}" />
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.7.0.min.js') }}"> </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap-5-3-1.min.js') }}"> </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap-datepicker-1-10-0.min.js') }}"> </script>
+    <script type="text/javascript">
+    function add(element, val) {
+        console.log("#"+val)
+        element.before( "hello"+val );
+    }
+    $(document).ready(function() {
+
+        $('#calendar').datepicker({
+        startDate: "0d",
+        multidate: true,
+        format: "dd/mm/yyyy",
+        todayHighlight: true,
+        weekStart: 1,
+        });
+
+        var olddates = []
+        $('#calendar').datepicker()
+            .on("changeDate", function(e) {
+                // `e` here contains the extra attributes
+
+                // Remove Element
+                if (olddates.length > e["dates"].length){
+                    var diff = $.grep(olddates, function(element) {
+                        return $.grep(e["dates"], function(obj) {
+                            return obj.getTime() == element.getTime();
+                        }).length == 0;
+                    });
+
+                    var g = diff[0].toLocaleDateString('en-GB', {datestyle:"medium", weekday: "short", day:"numeric", month: "2-digit", year:"2-digit"});
+                    var gid = g.split('/').join("")
+                    gid = gid.split(',').join("")
+                    gid = gid.split(' ').join("")
+                    $(`#${gid}`).remove()
+                    olddates = e["dates"]
+                    return
+                }
+
+                // Add
+                else {
+                    e["dates"].sort(function(a,b){
+                        return a < b ? -1 : a > b ? 1 : 0
+                    });
+                    var last = $("#start")
+                    var g = ""
+                    for(var i = 0, size = e["dates"].length; i < size ; i++){
+                        g = e["dates"][i].toLocaleDateString('en-GB', {datestyle:"medium", weekday: "short", day:"numeric", month: "2-digit", year:"2-digit"});
+                        console.log(g)
+                        var gid = g.split('/').join("")
+                        gid = gid.split(',').join("")
+                        gid = gid.split(' ').join("")
+                        if ($(`#${gid}`).length == 0){
+                            var but = $('<button/>',
+                            {
+                                text: '+',
+                                type:"button",
+                                class:"btn",
+                                name: g,
+                                click: function () { $(this).before(`<input type="time" class="time" name="${this.name}"">`); }
+                            });
+                            var item = $(`<div id=${gid}> <span class="date"><b> ${g} </b></span><input type="time" class="time" name="${g}""></div>`).append(but)
+                            $(last).after(item)
+                        }
+                            last = $(`#${gid}`)
+                        }
+                        last = $("#start")
+                        olddates = e["dates"]
+                    }
+                });
+            });
+
+    </script>
+    {% endblock %}
+
+{% block main %}
+    <h3> Create a new poll </h3>
+    {{ error if error != "" else ""  }}
+    <form id="newPollForm" method="post">
+        <b class="smallheading">Title</b> <br>
+        <input type="text" id="title" name="title" {{ "value="+title if title != "" else ""  }} placeholder="Title" required/> <br>
+        
+        <b class="smallheading">Comment</b> <br>
+        <textarea id="comment"  form="newPollForm" name="comment"  cols="40" rows="5" maxlength="1000" placeholder="Introduction what this poll is about">{{ comment }}</textarea><br>
+        
+        <b class="smallheading" style="text-align: center; width: 350px;">Select dates </b>
+        <div id="calendar"></div><br>
+
+        <div id="result"><span id="start"> </span></div>
+        <br><button type="submit" id="submitbutton" formaction="/submitnewpoodle">Create poodle</button>
+    </form>
+    
+    
+{% endblock %}

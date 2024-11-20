@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link type="text/css" rel="stylesheet"  href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="icon"  href="{{ url_for('static', filename='img/favicon.ico') }}">
+    {% block head_added %}{% endblock %}
+</head>
+<body>
+<div class="header">
+    <a id="header" href="/"><h1>Poodle</h1></a>
+    <p id="simple"> Scheduling made simple.</p>
+</div>
+
+<div class="main">
+    {% block main %}{% endblock %}
+</div>
+</body>
+</html>

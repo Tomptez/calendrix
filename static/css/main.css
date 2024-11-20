@@ -1,0 +1,147 @@
+/* General Layout */
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1em;
+    display:flex; 
+    flex-direction:column; 
+}
+    
+.header {
+    background-color:aliceblue;
+    padding-left: 15%;
+    width: 100%;
+    height: 120px;
+}
+
+a#header {
+    color: #3a4a52;
+    text-decoration: none;
+}
+
+a#header:hover {
+    color: black;
+}
+
+#header h1 {
+    margin-bottom: 0px;
+    font-weight: bolder;
+}
+
+#simple {
+    margin-top: 5px;
+    font-family: Courier;
+    font-style: italic;
+}
+
+.main {
+    height:300px;
+    padding-left: 15%;
+}
+
+#welcometext {
+    max-width: 800px;
+}
+
+/* On small devices */
+@media all and (max-width: 750px) {
+    .header { padding-left: 0%; height: 70px }
+    .main { padding-left: 0% }
+    .header h1 { margin: 2px }
+}
+
+/* Table */
+table {
+    border-collapse: collapse;
+    word-break: keep-all;
+}
+
+tr.invisible {
+    display:none;
+}
+
+#error {
+    color:red;
+}
+
+/*  select date  */
+.table-condensed {
+    width: 160%;
+}
+
+input.time {
+    margin: 2px;
+}
+
+button {
+    background-color: white;
+    border: solid gray 1px;
+    border-radius: 5px;
+    padding: 2px 10px;
+}
+
+button:hover {
+    background-color: rgb(174, 206, 219);
+}
+
+.btn {
+    border: white;
+    color: white;
+    margin-left: 3px;
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-weight: bolder;
+    background-color: green;
+}
+
+/* Main tables */
+/* column size  */
+#poodle_tb td {
+    vertical-align: top;
+    border-bottom: 1px solid oldlace;
+    border-left: 1px dotted oldlace;
+    margin: 2px;
+    padding: 2px 15px;
+    text-align: center;
+    width: 50px
+}
+
+/* add stripes to table */
+#tablehead:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+/* Hover over table rows */
+#tablehead:hover td {
+    background: #dbf5fa;
+    }
+
+/* make table header look nice */
+#poodle_tb th {
+    text-align: left;
+    font-size: 0.8em;
+    color: #fff;
+    background-color: #3a4a52;
+    border-color: oldlace;
+    border-left: 1px dashed;
+    padding: 2px 15px;
+    top: 0px;
+    text-align: center;
+}
+
+
+th:hover {
+    background-color: #4d6e80
+}
+
+.date {
+    font-size: 0.9em;
+    display: inline-block;
+    width: 100px;
+}
+
+.smallheading {
+    display: inline-block;
+    padding-top: 15px;
+    padding-bottom: 3px;
+}
+

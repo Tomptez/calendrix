@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block head_added %}
+    <title>Poodle</title>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.7.0.min.js') }}"> </script>
+    <script type="text/javascript" language="javascript">  
+        $(document).ready(function() {
+            // insert into table
+            var head = '{{ header }}'
+            $("thead").prepend(head)
+            $("#poodle_tb").append('{{ lhtml }}')
+
+            $('td:contains("+")').css("background-color", "lightgreen");
+            $('td:contains("-")').css("background-color", "lightcoral");
+            var td_high = $('td').filter(function() {
+                return parseInt($(this).text(), 10) >= parseInt("{{ mean }}");
+            });
+            td_high.css("background-color", "lightblue");
+            var td_max = $('td').filter(function() {
+                return parseInt($(this).text(), 10) == parseInt("{{ max }}");
+            });
+            td_max.css("background-color", "blue");
+            function replaceRow(uid, tr){
+                $.post( "/getrow", { uid: uid})
+                .done(function( data ) {
+                    tr.before(data)
+                    tr.remove()
+                });
+            }
+            $('.editbtn').on('click', function (e) {
+                var id = $(this).attr('id');
+                var tr = $(this).closest('tr')
+                replaceRow(id, tr)
+               });
+
+               var url = window.location.href;
+               $('#copy_text').val(url);
+        });
+
+
+        function CopyUrl() {
+            $('#copy_text').select();
+             document.execCommand("copy");
+         } 
+    </script>
+{% endblock %}
+
+{% block main %}
+    <h3> Poll: {{ info["title"] }} </h3>
+    <p class="comment"> {{ info["comment"] }} </p>
+    Link to your poll:
+    <input type="text" id="copy_text" size="40">
+    <button onclick="CopyUrl()">Copy</button> <br><br>
+        {{ table }}
+    <br>
+
+{% endblock %}
